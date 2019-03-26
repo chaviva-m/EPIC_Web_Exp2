@@ -1,0 +1,164 @@
+﻿@model ExperimentApp.Models.Participant
+@{
+    ViewBag.Title = "Game A";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<html>
+
+<body>
+
+    <h2></h2>
+
+    <div id="generalInstructions" dir="rtl" lang="he" style="font-size:x-large" ,"text-align:center">
+        <br />
+        <p>כעת תשחק בשני משחקים קצרים מול שחקן נוסף המשתתף בניסוי במקביל אליך בחדר הסמוך. </p>
+        @*<p>אנו נצרף אותך לשחקן נוסף שגם הוא משתתף בניסוי במקביל אליך.</p>*@
+        <p></p>
+        <p>לפני כל משחק יופיעו הוראות. אנא קרא אותם בעיון ואם משהו לא מובן פנה למפעיל הניסוי לפני שתתקדם למשחק.</p>
+        <p><b>במהלך הניסוי ישנה אפשרות להרוויח סכום כסף מסויים, בהתאם להחלטותיך ולהחלטות  השחקן השני.</b></p>
+        @*<p><b>סכום הכסף אותו תרוויח במהלך המשחקים הוא סכום הכסף שתקבל בסוף הניסוי.</b></p>*@
+        <p><b>בתום הניסוי תגלה את החלטות השחקן השני ותקבל ממפעיל הניסוי את סך הכסף שהרווחת במהלך שני המשחקים.</b></p>
+        <p>*ההוראות מנוסחות בלשון זכר אך מיועדות לנשים וגברים כאחד.</p>
+        <br />
+        <input type="button" id="contBtn" style="float: right" ; value="המשך" onclick="showUltiInstructions()">
+        <div id="myGif1" style="display:none"><img id="waitingGif1" height="200" ; src="~/Content/Gifs/waiting.gif"></div>
+        <p id="msg1" style="display:none">מחכים לשחקן השני...</p>
+    </div>
+    <div id="ultiInstructions" style="display:none">
+        <div dir="rtl" lang="he" style="font-size:x-large">
+            <div dir="rtl" lang="he">
+                <h1>משחק ראשון:</h1>
+                <img height="150" src="~/Content/images/ultimatum_pic.png" style="float:left" ;>
+                <p>זהו משחק בין 2 משתתפים המתרחש בשלושה שלבים:</p>
+                <p><u>בשלב הראשון:</u> השחקן הראשון מקבל סכום כסף כלשהו.</p>
+                <p>
+                    <u>בשלב השני:</u> השחקן הראשון מחליט כמה כסף מתוך סכום זה הוא רוצה להציע לשחקן השני (אם בכלל).
+                </p>
+                <p> <u>בשלב השלישי:</u> בפני השחקן השני עומדות שתי אפשרויות: הסכמה או סירוב.</p>
+                <p>אם יסכים - הכסף יחולק לפי הצעת השחקן הראשון. <b>אם יסרב - שני השחקנים לא יקבלו דבר</b>.</p>
+                <p>בהצלחה!</p>
+            </div>
+            <div id="waitBtn">
+                <br />
+                <input type="button" style="float: right" ; value="לתחילת המשחק" onclick="show()">
+            </div>
+            <div id="myGif" style="display:none"><img id="waitingGif" height="200" ; src="~/Content/Gifs/waiting.gif"></div>
+            <p id="msg" style="display:none">מחכים לשחקן השני...</p>
+        </div>
+    </div>
+
+    <div id="youStart" style="display:none" dir="rtl" lang="he">
+        <h1 style="color:red;font-size:xx-large">נבחרת להיות השחקן הראשון!</h1>
+        <b style="font-size:x-large">יש ברשותך 10 שקלים<br /></b>
+        <br />
+    </div>
+    <center id="waitPage" style="display:none" align="middle">
+        <img id="waitingGif1" height="200" ; src="~/Content/Gifs/waiting.gif">
+        <p dir="rtl" lang="he" id="msg1" style="font-size:x-large">מחכים להחלטת השחקן השני...</p>
+    </center>
+
+    @*<center>
+        <img id="picture" height="150" src="~/Content/images/ultimatum_pic.png" style="display:none;float:left"/>
+    </center>*@
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.ExpOption)
+        @Html.HiddenFor(model => model.EmotionalContent)
+        @Html.HiddenFor(model => model.VideoPath)
+        @Html.HiddenFor(model => model.VideoDataPath)
+        @Html.HiddenFor(model => model.AudioPath)
+        @Html.HiddenFor(model => model.AudioDataPath)
+        @Html.HiddenFor(model => model.UltimatumInstructionReadTime)
+        @Html.HiddenFor(model => model.UltimatumDMtime)
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div id="inputField">
+
+
+            <fieldset id="subForm" style="display:none" dir="rtl" lang="he">
+
+                <legend style="font-size:x-large">כמה כסף ברצונך להציע?</legend>
+                <div>
+                    <label style="font-size:large" for="proposal"> סכום בש"ח (מספר שלם בין 0 ל- 10) </label>
+                </div>
+                <div class="editor field">
+                    @Html.TextBoxFor(model => model.UltimatumGaveSum, new { id = "propId" })
+                </div>
+                <div>
+                    <label>&nbsp;</label>
+                    <br />
+                    <input style="font-size:x-large" id="submit" type="submit" value="המשך למשחק הבא" class="submit" />
+                </div>
+            </fieldset>
+        </div>
+    }
+</body>
+</html>
+<script>
+
+    var instBegin;
+    var instEnd;
+    var gameBegin;
+    var gameEnd;
+    //The player pressed a button that he is ready to start the game. A loading gif will show.
+    function show() {
+        instEnd = Math.floor(Date.now() / 1000);  //time player indicated he was ready to start, seconds
+        document.getElementById('UltimatumInstructionReadTime').value = instEnd - instBegin;
+        document.getElementById("waitBtn").disabled = true;
+        document.getElementById("myGif").style.display = "block";
+        document.getElementById("msg").style.display = "block";
+        setTimeout("hide()", 4000);  // 5 seconds
+    }
+
+    //the loading gif is over. Player need to decide how much money to give.
+    function hide() {
+        document.getElementById("myGif").style.display = "none";
+        document.getElementById("msg").style.display = "none";
+        document.getElementById("youStart").style.display = "block";
+        document.getElementById("waitBtn").style.display = "none";
+        setTimeout('document.getElementById("subForm").style.display = "block"', 2000);
+        gameBegin = Math.floor(Date.now() / 1000);  //decision-making part starts.
+        }
+
+    function showUltiInstructions() {
+        document.getElementById("contBtn").disabled = true;
+        document.getElementById("contBtn").style.display = "none";
+        document.getElementById("myGif1").style.display = "block";
+        document.getElementById("msg1").style.display = "block";
+        setTimeout("hideUltiInstructions()", 5000);  // 5 seconds
+    }
+
+    function hideUltiInstructions() {
+        document.getElementById("generalInstructions").style.display = "none";
+        document.getElementById("ultiInstructions").style.display = "block";
+        instBegin = Math.floor(Date.now() / 1000);  //time instructions began, seconds
+    }
+
+    $(window).load(function () {
+        var submit = false;
+        $('#submit').on('click', function (e) {
+            var el = document.getElementById("propId").value;
+            if (el < 0 || el > @Model.UltimatumReceivedSum || Math.floor(el) != el || el == "" || el.length == 0 || el == null) {
+                alert("נא להזין מספר שלם בין 0 ל 10 ");
+                return false;
+            } else 
+            $('#ultiInstructions').hide();
+            $('#inputField').hide();
+            $('#youStart').hide();
+            $('#waitPage').show();
+            gameEnd = Math.floor(Date.now() / 1000);
+            document.getElementById('UltimatumDMtime').value = gameEnd - gameBegin;
+            setTimeout(function () {
+                submit = true;
+                $("#submit").trigger("click"); // if you want
+            }, 5000);
+            if (!submit)
+                e.preventDefault();
+        });
+    });
+
+</script>

@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "InitializeExp";
+}
+
+<h1></h1>
+
+<div dir="rtl" lang="he" style="font-size:x-large">
+    <center>
+        <h1 id="welcome" style="display:block"><br /><br />ברוכים הבאים!<br /><br /></h1>
+        <input style="display:block;" type="button" id="start" value="התחל את הניסוי" onclick="show()">
+        <div id="Loading" style="display:none">
+            <center>
+                <h2 style="font-size:x-large"><br />אנא המתן מספר שניות.</h2>
+                <img height="300" ; src="~/Content/Gifs/startLoad.gif">
+            </center>
+        </div>
+    </center>
+</div>
+
+
+<script type="text/javascript">
+    function show() {
+        document.getElementById("welcome").style.display = "none"
+        document.getElementById("start").disabled = true;
+        document.getElementById("start").style.display = "none"
+        document.getElementById("Loading").style.display = "block";
+        window.location.href = '@Url.Action("VideoBaseline", "Home", new { id = Model.ID }, null)'; /*Start*/
+    }
+</script>
+

@@ -1,0 +1,52 @@
+﻿@model ExperimentApp.Models.Participant
+
+@{
+    ViewBag.Title = "Start";
+}
+
+<div id="explanation">
+    <br />
+    <div style="font-size:x-large" dir="rtl" lang="he">
+        <p>תודה שבאתם להשתתף בניסוי.</p>
+        <p>אתם מוזמנים בכל שלב לפנות למפעיל הניסוי אם משהו לא ברור לכם.</p>
+        <p>*ההוראות מנוסחות לעיתים בלשון זכר ולעיתים בלשון נקבה, אך מיועדות לבני שני המינים.</p>
+        <br />
+        <p><b>הניסוי בו אתם עומדים להשתתף מורכב ממספר שלבים:</b></p>
+        <p>ראשית תצפו בסרטון, שלאחריו תתבקשו להקליט את עצמיכם מספרים בקצרה על תחושות שעלו אצלכם במהלך הצפייה ולמלא שאלון קצר. </p>
+        <p>בשלב הבא תשתתפו בשני משחקים קצרים, מול שחקן נוסף המבצע את הניסוי בחדר הסמוך.</p>
+        <p>בהצלחה!</p>
+    </div>
+    <br />
+    <p style="font-size:x-large" dir="rtl" lang="he">
+        מוכנים להתחיל?
+        <input type="button" id="playVideo" dir="rtl" lang="he" value="המשך לסרטון" onclick="show()">
+    </p>
+</div>
+
+@*<div id="loading1" dir="rtl" lang="he">
+    <center>
+        <h2 style="font-size:large"><br />אנא המתן מספר שניות.</h2>
+        <img height="300" ; src="~/Content/Gifs/startLoad.gif">
+    </center>
+</div>*@
+
+<div id="myGif" style="display:none">
+    <center>
+        <img height="300" ; src="~/Content/Gifs/loading.gif">
+    </center>
+</div>
+
+<script type="text/javascript">
+    //setTimeout(function () {
+    //    document.getElementById("loading1").style.display = "none";
+    //    document.getElementById("explanation").style.display = "block";
+    //}, 3 * 1000);
+    //loading
+    function show() {
+        document.getElementById("playVideo").disabled = true;
+        document.getElementById("myGif").style.display = "block";
+        window.location.href = '@Url.Action("Video", "Home", new { id = Model.ID }, null)';
+    } 
+</script>
+
+

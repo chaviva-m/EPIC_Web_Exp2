@@ -1,0 +1,138 @@
+﻿@model ExperimentApp.Models.Participant
+@Html.Hidden("TrustGaveSum", Model.TrustGaveSum)
+@{
+    ViewBag.Title = "Game B";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<h2></h2>
+<div id="second_game" dir="rtl" lang="he" style="font-size:large" ,"text-align:center">
+    <br /> <br /> <br />
+    <center>
+        <h1>עוברים למשחק הבא!</h1>
+    </center>
+</div>
+<div id="trustInstructions" dir="rtl" lang="he" style="font-size:x-large;display:none;">
+    <h1>משחק שני:</h1>
+    <img height="200" src="~/Content/images/trust_pic2.png" style="float:left">
+    <div>
+
+        <p>גם משחק זה הינו בין 2 משתתפים ומתרחש בשלושה שלבים:</p>
+        <p><u>בשלב הראשון:</u> השחקן הראשון מקבל סכום כסף כלשהו.</p>
+        <p>
+            <u>בשלב השני:</u> השחקן הראשון מחליט כמה מתוך סכום זה הוא רוצה להציע לשחקן השני (אם בכלל).
+        </p>
+        <p> סכום זה יוכפל פי 3 ויועבר לשחקן השני, כלומר - <b>השחקן השני יקבל פי 3 מהסכום שהשחקן הראשון הציע לו.</b></p>
+        <p>
+            <u>בשלב השלישי:</u> השחקן השני מחליט כמה כסף, מתוך הסכום שקיבל מהשחקן הראשון, הוא רוצה להעביר לשחקן הראשון בחזרה (אם בכלל).
+        </p>
+        <p>בהצלחה!</p>
+    </div>
+    <div id="waitBtn">
+        <br />
+        <input type="button" style="float: right" ; value="לתחילת המשחק" onclick="show()">
+    </div>
+    <div id="myGif" style="display:none"><img id="waitingGif" height="200" ; src="~/Content/Gifs/waiting.gif"></div>
+    <p id="msg" style="display:none">מחכים לשחקן השני...</p>
+</div>
+
+<center id="waitPage" style="display:none" align="middle">
+    <img id="waitingGif1" height="230" ; src="~/Content/Gifs/waiting.gif">
+    <p dir="rtl" lang="he" id="msg1" style="font-size:x-large">מחכים להחלטת השחקן השני...</p>
+</center>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.ExpOption)
+    @Html.HiddenFor(model => model.EmotionalContent)
+    @Html.HiddenFor(model => model.VideoPath)
+    @Html.HiddenFor(model => model.VideoDataPath)
+    @Html.HiddenFor(model => model.AudioPath)
+    @Html.HiddenFor(model => model.AudioDataPath)
+    @Html.HiddenFor(model => model.UltimatumGaveSum)
+    @Html.HiddenFor(model => model.UltimatumInstructionReadTime)
+    @Html.HiddenFor(model => model.UltimatumDMtime)
+    @Html.HiddenFor(model => model.TrustInstructionReadTime)
+    @Html.HiddenFor(model => model.TrustDMtime)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div id="inputField">
+        <div id="youStart" style="display:none" dir="rtl" lang="he">
+            <h1 style="color:red;font-size:xx-large">נבחרת להיות השחקן הראשון!</h1>
+            <b style="font-size:x-large">יש ברשותך 10 שקלים</b>
+            <br />
+        </div>
+
+        <fieldset id="subForm" style="display:none" dir="rtl" lang="he">
+            <legend style="font-size:x-large">כמה כסף ברצונך להציע?</legend>
+            <div>
+                <label style="font-size:large" for="proposal">סכום בש"ח (מספר שלם בין 0 ל- 10) </label>
+            </div>
+            <div class="editor field">
+                @Html.TextBoxFor(model => model.TrustGaveSum, new { id = "propId" })
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <br />
+                <input style="font-size:x-large" id="submit" type="submit" value="המשך" class="submit" />
+            </div>
+        </fieldset>
+    </div>
+}
+
+<script>
+    var instBegin;
+    var instEnd;
+    var gameBegin;
+    var gameEnd;
+
+    setTimeout(function () {
+        document.getElementById('second_game').style.display = 'none';
+        document.getElementById('trustInstructions').style.display = 'block';
+        instBegin = Math.floor(Date.now() / 1000);  //time instructions began, seconds
+    }, 2 * 1000);
+
+    function show() {
+        instEnd = Math.floor(Date.now() / 1000);  //time player indicated he was ready to start, seconds
+        document.getElementById('TrustInstructionReadTime').value = instEnd - instBegin;
+        document.getElementById("waitBtn").disabled = true;
+        document.getElementById("waitBtn").style.display = "none"
+        document.getElementById("myGif").style.display = "block";
+        document.getElementById("msg").style.display = "block";
+        setTimeout("hide()", 7000);  // 7 seconds
+    }
+
+    function hide() {
+        document.getElementById("myGif").style.display = "none";
+        document.getElementById("msg").style.display = "none";
+        document.getElementById("subForm").style.display = "block";
+        document.getElementById("youStart").style.display = "block";
+        document.getElementById("waitBtn").style.display = "none"
+        gameBegin = Math.floor(Date.now() / 1000);  //decision-making part starts.
+    }
+
+   $(window).load(function () {
+        var submit = false;
+        $('#submit').on('click', function (e) {
+            var el = document.getElementById("propId").value;
+            if (el < 0 || el > @Model.TrustReceivedSum || Math.floor(el) != el || el == "" || el.length == 0 || el == null) {
+                alert("נא להזין מספר שלם בין 0 ל 10 ");
+                return false;
+            }else
+            $('#trustInstructions').hide();
+            $('#inputField').hide();
+            $('#waitPage').show();
+            gameEnd = Math.floor(Date.now() / 1000);
+            document.getElementById('TrustDMtime').value = gameEnd - gameBegin;
+            setTimeout(function () {
+                submit = true;
+                $("#submit").trigger("click"); // if you want
+            }, 5000);
+            if (!submit)
+                e.preventDefault();
+        });
+    });
+
+</script>

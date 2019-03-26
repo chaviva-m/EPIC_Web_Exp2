@@ -1,0 +1,241 @@
+﻿@model ExperimentApp.Models.SelfReportQuestionnaire
+
+@{
+    ViewBag.Title = "Questionnaire";
+}
+
+<h2 dir="rtl" lang="he">שאלון דיווח</h2>
+
+<h4 dir="rtl" lang="he">
+    השאלון הבא מורכב ממספר מילים שמתארות רגשות שונים. ציינ/י ליד כל רגש עד כמה הרגשת אותו בזמן הצפייה בסרטון:   1 - מעט מאוד/כלל לא, 5 - הרבה מאוד
+</h4>
+<h4></h4>
+
+<div dir="rtl" lang="he">
+    @using (Html.BeginForm(new { id = Model.ID }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.ParticipantID)
+        for (int i = 0; i < Model.Emotions.Count; i++)
+        {
+            @Html.HiddenFor(model => Model.Emotions[i].ID)
+            @Html.HiddenFor(model => Model.Emotions[i].ParticipantID)
+            @Html.HiddenFor(model => Model.Emotions[i].Name)
+        }
+        <div class="form-horizontal">
+            <div class="container">
+                @*<tr>
+                    <th style="font-size:larger">
+                        רגש
+                    </th>
+                    <th>
+
+                    </th>
+                    @{
+                        foreach (var item in Model.Options)
+                        {
+                            <th style="font-size:larger">
+                                @item
+                            </th>
+                        }
+                    }
+                </tr>*@
+                <div class="row">
+                    <div class="col-xs-12" style="font-size:larger"><b>רגש</b></div>
+                    @*<div class="col-xs-12"></div>
+                    @{
+                        foreach (var item in Model.Options)
+                        {
+                            <div class="col-xs-12" style="font-size:large">
+                                <b>@item</b>
+                            </div>
+                        }
+                    }*@
+                </div>
+                @{
+                    for (int i = 0; i < Model.Emotions.Count; i++)
+                    {
+                <div class="row">
+                    @*<div class="col-xs-12" style="font-size:larger">
+                        @Html.DisplayFor(model => model.Emotions[i].Name)
+                    </div>*@
+                    <div class="col-xs-12">
+                        @*<div class="chart-scale">*@
+                        @*@foreach (var opt in Model.Options)*@
+                        @*{*@
+                            @*<td>*@
+
+                            
+                        <label for="@Model.Emotions[i].Strength">@Model.Emotions[i].Name</label> 
+                        <input id="choice" type="range" min="1" max="5" />
+
+                            @*<button class="btn btn-scale btn-scale-asc-1" onclick="@Model.Emotions[i].Strength = this.innerHTML;">@opt</button>*@
+                            @* @Html.RadioButtonFor(model => model.Emotions[i].Strength, opt, new { required = "required", @style = "margin: 1em 1em 1em 0;transform: scale(1.8, 1.8);-moz-transform: scale(1.8, 1.8);-ms-transform: scale(1.8, 1.8);-webkit-transform: scale(1.8, 1.8);-o-transform: scale(1.8, 1.8);" })*@
+                            @Html.ValidationMessageFor(model => model.Emotions[i].Strength, "", new { @class = "text-danger" })
+                            @*</td>*@
+                        @*}*@
+                        @*</div>*@
+                    </div>
+                </div>
+                    }
+                }
+            </div>
+            <div class="form-group">
+                <div class="col-md col-md-offset-12">
+                    <input type="submit" value="שלח" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<head>
+    <style>
+        .btn-scale {
+            min-width: 44px;
+            width: 6%;
+            text-align: center;
+            font-weight: bold;
+            color: black;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .btn-scale-asc-1, .btn-scale-desc-10 {
+            background-color: #33FF00;
+        }
+
+            .btn-scale-asc-1:hover,
+            .btn-scale-desc-10:hover {
+                background-color: #2CDE00;
+            }
+
+        .btn-scale-asc-2,
+        .btn-scale-desc-9 {
+            background-color: #66FF00;
+        }
+
+            .btn-scale-asc-2:hover,
+            .btn-scale-desc-9:hover {
+                background-color: #59DE00;
+            }
+
+        .btn-scale-asc-3,
+        .btn-scale-desc-8 {
+            background-color: #99FF00;
+        }
+
+            .btn-scale-asc-3:hover,
+            .btn-scale-desc-8:hover {
+                background-color: #85DE00;
+            }
+
+        .btn-scale-asc-4,
+        .btn-scale-desc-7 {
+            background-color: #CCFF00;
+        }
+
+            .btn-scale-asc-4:hover,
+            .btn-scale-desc-7:hover {
+                background-color: #B1DE00;
+            }
+
+        .btn-scale-asc-5,
+        .btn-scale-desc-6 {
+            background-color: #FFFF00;
+        }
+
+            .btn-scale-asc-5:hover,
+            .btn-scale-desc-6:hover {
+                background-color: #DEDE00;
+            }
+
+        .btn-scale-asc-6,
+        .btn-scale-desc-5 {
+            background-color: #FFCC00;
+        }
+
+            .btn-scale-asc-6:hover,
+            .btn-scale-desc-5:hover {
+                background-color: #DEB100;
+            }
+
+        .btn-scale-asc-7,
+        .btn-scale-desc-4 {
+            background-color: #FF9900;
+        }
+
+            .btn-scale-asc-7:hover,
+            .btn-scale-desc-4:hover {
+                background-color: #DE8500;
+            }
+
+        .btn-scale-asc-8,
+        .btn-scale-desc-3 {
+            background-color: #FF6600;
+        }
+
+            .btn-scale-asc-8:hover,
+            .btn-scale-desc-3:hover {
+                background-color: #DE5900;
+            }
+
+        .btn-scale-asc-9,
+        .btn-scale-desc-2 {
+            background-color: #FF3300;
+        }
+
+            .btn-scale-asc-9:hover,
+            .btn-scale-desc-2:hover {
+                background-color: #DE2C00;
+            }
+
+        .btn-scale-asc-10,
+        .btn-scale-desc-1 {
+            background-color: #FF0000;
+        }
+
+            .btn-scale-asc-10:hover,
+            .btn-scale-desc-1:hover {
+                background-color: #DE0000;
+            }
+    </style>
+</head>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="page-header">1 is good, 10 is bad (i.e., "How much pain are you in right now?")</p>
+            <div class="chart-scale">
+                <button class="btn btn-scale btn-scale-asc-1" onclick="alert(this.innerHTML);">1</button>
+                <button class="btn btn-scale btn-scale-asc-2">2</button>
+                <button class="btn btn-scale btn-scale-asc-3">3</button>
+                <button class="btn btn-scale btn-scale-asc-4">4</button>
+                <button class="btn btn-scale btn-scale-asc-5">5</button>
+                <button class="btn btn-scale btn-scale-asc-6">6</button>
+                <button class="btn btn-scale btn-scale-asc-7">7</button>
+                <button class="btn btn-scale btn-scale-asc-8">8</button>
+                <button class="btn btn-scale btn-scale-asc-9">9</button>
+                <button class="btn btn-scale btn-scale-asc-10">10</button>
+                <hr />
+
+                <p class="page-header">1 is bad, 10 is good (i.e., "How happy are you feeling today?")</p>
+                <div class="chart-scale">
+                    <button class="btn btn-scale btn-scale-desc-1">1</button>
+                    <button class="btn btn-scale btn-scale-desc-2">2</button>
+                    <button class="btn btn-scale btn-scale-desc-3">3</button>
+                    <button class="btn btn-scale btn-scale-desc-4">4</button>
+                    <button class="btn btn-scale btn-scale-desc-5">5</button>
+                    <button class="btn btn-scale btn-scale-desc-6">6</button>
+                    <button class="btn btn-scale btn-scale-desc-7">7</button>
+                    <button class="btn btn-scale btn-scale-desc-8">8</button>
+                    <button class="btn btn-scale btn-scale-desc-9">9</button>
+                    <button class="btn btn-scale btn-scale-desc-10">10</button>
+
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
+

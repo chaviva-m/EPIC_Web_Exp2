@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace ExperimentApp.Infrastructure
+{
+    public class Emotions
+    {
+        public static List<string> SelfReportEmotions { get; set; } = new List<string>
+        {
+            "אדישות Apathy", "עצב Sadness", "רוגע Calm",
+            "בידור Amusement","צער Grief", "שמחה Happiness",
+            //"Apathy אדישות", "Sadness עצב", "Calm רוגע",
+            //"Amusement בידור","Grief צער", "Happiness שמחה",
+        };
+    }
+}

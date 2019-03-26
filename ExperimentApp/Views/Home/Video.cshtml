@@ -1,0 +1,64 @@
+﻿@model ExperimentApp.Models.Participant
+
+@{
+    ViewBag.Title = "Video";
+}
+
+<div dir="rtl" lang="he">
+    <br /><br />
+    <div>
+        <button id="playButton" onclick="playVideo()">
+            לחץ להפעלת הסרטון
+        </button>
+        <br />
+    </div>
+    <video id="videoPlayer" width="450" height="320">
+        <source src="@Url.Action("GetVideo", "Home", new {em = Model.EmotionalContent})" type="video/mp4">
+    </video>
+</div>
+
+<script type="text/javascript">
+    function isFullScreenAvailable() {
+        return (
+            document.fullscreenEnabled ||
+            document.webkitFullscreenEnabled ||
+            document.mozFullScreenEnabled ||
+            document.msFullscreenEnabled
+        );
+    }
+    function requestFullScreen(elementToRequest) {
+        if (elementToRequest.requestFullScreen) {
+            elementToRequest.requestFullScreen();
+        }
+        else if (elementToRequest.webkitRequestFullscreen) {
+            elementToRequest.webkitRequestFullscreen();
+        }
+        else if (elementToRequest.mozRequestFullScreen) {
+            elementToRequest.mozRequestFullScreen();
+        }
+        else if (elementToRequest.msRequestFullscreen) {
+            elementToRequest.msRequestFullscreen();
+        }
+    }
+
+    var videoElement = document.getElementById('videoPlayer');
+    function makeVideoFullScreen() {
+        if (isFullScreenAvailable) {
+            requestFullScreen(videoElement);
+            return;
+        }
+        alert("Sorry full screen is not available in this browser");
+    }
+    function playVideo() {
+        var btn = document.getElementById("playButton");
+        btn.innerHTML = "חזור למסך מלא";
+        makeVideoFullScreen();
+        videoElement.play();
+        return;
+    }
+    videoElement.addEventListener('ended', myHandler, false);
+    function myHandler(e) {
+        document.getElementById("playButton").disabled = true;
+        window.location.href = '@Url.Action("EndVideo", new { id = Model.ID })';
+    }
+</script>

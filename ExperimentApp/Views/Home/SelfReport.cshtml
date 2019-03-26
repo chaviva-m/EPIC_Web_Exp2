@@ -1,0 +1,70 @@
+﻿@model ExperimentApp.Models.SelfReportQuestionnaire
+
+@{
+    ViewBag.Title = "Questionnaire";
+}
+
+<h2 dir="rtl" lang="he">שאלון דיווח</h2>
+
+<h3 dir="rtl" lang="he">
+    השאלון הבא מורכב ממספר מילים שמתארות רגשות שונים. ציינ/י ליד כל רגש עד כמה הרגשת אותו בזמן הצפייה בסרטון:<br /> 1 - מעט מאוד/כלל לא, 5 - הרבה מאוד
+</h3>
+<h4>
+    <br />
+</h4>
+
+<div dir="rtl" lang="he" style="font-size:large">
+    @using (Html.BeginForm(new { id = Model.ID }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.ParticipantID)
+        for (int i = 0; i < Model.Emotions.Count; i++)
+        {
+            @Html.HiddenFor(model => Model.Emotions[i].ID)
+            @Html.HiddenFor(model => Model.Emotions[i].ParticipantID)
+            @Html.HiddenFor(model => Model.Emotions[i].Name)
+        }
+        <div class="form-horizontal">
+            <table class="table">
+                <tr>
+                    <td style="font-size:larger"><b>רגש</b></td>
+                    <td>
+
+                    </td>
+                    @{
+                        foreach (var item in Model.Options)
+                        {
+                            <td style="font-size:large">
+                                <b>@item</b>
+                            </td>
+                        }
+                    }
+                </tr>
+                @{
+                    for (int i = 0; i < Model.Emotions.Count; i++)
+                    {
+                        <tr>
+                            <td style="font-size:larger">
+                                @Html.DisplayFor(model => model.Emotions[i].Name)
+                            </td>
+                            <td></td>
+                            @foreach (var opt in Model.Options)
+                            {
+                                <td>
+                                    @Html.RadioButtonFor(model => model.Emotions[i].Strength, opt, new { required = "required", @style = "margin: 1em 1em 1em 0;transform: scale(1.8, 1.8);-moz-transform: scale(1.8, 1.8);-ms-transform: scale(1.8, 1.8);-webkit-transform: scale(1.8, 1.8);-o-transform: scale(1.8, 1.8);" })
+                                    @Html.ValidationMessageFor(model => model.Emotions[i].Strength, "", new { @class = "text-danger" })
+                                </td>
+                            }
+                        </tr>
+                    }
+                }
+            </table>
+            <div class="form-group">
+                <div class="col-md col-md-offset-12">
+                    <input style="font-size:large"type="submit" value="שלח" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
