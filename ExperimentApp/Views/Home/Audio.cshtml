@@ -4,6 +4,7 @@
     ViewBag.Title = "Audio";
 }
 
+
 <p id="msg" style="display:none">@TempData["ErrorMessage"]</p>
 
 <!DOCTYPE html>
@@ -14,13 +15,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body dir="rtl" lang="he" style="font-size:large">
-    <h1>ספר לנו על החוויה!</h1>
-    <p>אנא שתף אותנו במשפט אחד או שניים בתחושתך במהלך הצפייה בסרטון. תוכל להיעזר במילים המופיעות מטה, כרצונך. </p>
-    <p>כשאתה מוכן, לחץ על "הקלט" ולסיום "עצור".</p>
-    <p>אנא השתדל לדבר בקול רם וברור ובסמוך למחשב.</p>
+<body dir="rtl" lang="he" style="font-size:x-large">
+    <br /><br /><br />
+    <h1>ספר לנו על החוויה</h1>
     <br />
-    <div>
+    <p>אנא שתף אותנו במשפט אחד או שניים בתחושותיך מהצפייה בסרטון או מהאירוע בו נזכרת. @*תוכל להיעזר במילים המופיעות מטה, כרצונך.*@ </p>
+    <p>כשאתה מוכן, לחץ על "הקלט" ולסיום "עצור".</p>
+    <p style="display:none">אנא השתדל לדבר בקול רם וברור @*ובסמוך למחשב*@.</p>
+    <br />
+    <div style="display:none">
         <center>
             <img width="1200" , src="~/Content/images/emotion_words.png">
         </center>
