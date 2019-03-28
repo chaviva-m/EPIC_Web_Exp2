@@ -3,6 +3,7 @@
     ViewBag.Title = "InitializeExp";
 }
 
+
 <h1></h1>
 
 <div dir="rtl" lang="he" style="font-size:x-large">
@@ -25,7 +26,7 @@
         document.getElementById("start").disabled = true;
         document.getElementById("start").style.display = "none"
         document.getElementById("Loading").style.display = "block";
-        window.location.href = '@Url.Action("WritingAssignment", "Home", new { id = Model.ID }, null)'; /*VideoBaseline*/
+        window.location.href = '@Url.Action("VideoBaseline", "Home", new { id = Model.ID }, null)'; /*VideoBaseline*/
     }
 </script>
 

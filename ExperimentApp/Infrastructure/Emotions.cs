@@ -11,8 +11,6 @@ namespace ExperimentApp.Infrastructure
         {
             "אדישות Apathy", "עצב Sadness", "רוגע Calm",
             "בידור Amusement","צער Grief", "שמחה Happiness",
-            //"Apathy אדישות", "Sadness עצב", "Calm רוגע",
-            //"Amusement בידור","Grief צער", "Happiness שמחה",
         };
     }
 }

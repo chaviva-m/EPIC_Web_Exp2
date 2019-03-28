@@ -25,7 +25,7 @@ namespace ExperimentApp.Infrastructure
         {
             {EmotionalContentEnum.Happy, VideoRootDir + "Friends.mp4" }, //+ "shortTemp.mp4" }, //"UriChizkiya.mp4" }
             {EmotionalContentEnum.Sad, VideoRootDir + "LionKing.mp4" }, //"LionKingEnglish.mp4" },
-            {EmotionalContentEnum.Neutral, VideoRootDir + "GreatBarrierReefAustralia.mp4" }
+            {EmotionalContentEnum.Neutral, VideoRootDir + "GreatBarrierReef.mp4" }
         };
 
     }

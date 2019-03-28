@@ -107,10 +107,10 @@
     function hide() {
         document.getElementById("myGif").style.display = "none";
         document.getElementById("msg").style.display = "none";
-        document.getElementById("subForm").style.display = "block";
         document.getElementById("youStart").style.display = "block";
         document.getElementById("waitBtn").style.display = "none"
         gameBegin = Math.floor(Date.now() / 1000);  //decision-making part starts.
+        setTimeout('document.getElementById("subForm").style.display = "block"', 2000);
     }
 
    $(window).load(function () {

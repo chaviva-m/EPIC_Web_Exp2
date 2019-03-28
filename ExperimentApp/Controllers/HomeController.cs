@@ -98,12 +98,6 @@ namespace ExperimentApp.Controllers
             {
                 return RedirectToAction("BaselineAudio", new { id = participant.ID });
             }
-            ////record baseline video
-            //bool resultV = RecordVideo(participant, videoBaselineModel);
-            //if (!resultV)
-            //{
-            //    return RedirectToAction("Error");
-            //}
             return RedirectToAction("Start", new { id = participant.ID });
         }
 

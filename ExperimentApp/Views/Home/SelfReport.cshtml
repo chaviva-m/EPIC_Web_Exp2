@@ -4,10 +4,12 @@
     ViewBag.Title = "Questionnaire";
 }
 
+<br /><br /><br />
+
 <h2 dir="rtl" lang="he">שאלון דיווח</h2>
 
 <h3 dir="rtl" lang="he">
-    השאלון הבא מורכב ממספר מילים שמתארות רגשות שונים. ציינ/י ליד כל רגש עד כמה הרגשת אותו בזמן הצפייה בסרטון:<br /> 1 - מעט מאוד/כלל לא, 5 - הרבה מאוד
+    השאלון הבא מורכב ממספר מילים שמתארות רגשות שונים. ציינ/י ליד כל רגש עד כמה הוא מתאים לתחושותיך כעת@*הרגשת אותו בזמן הצפייה בסרטון*@:<br /> 1 - מעט מאוד/כלל לא, 5 - הרבה מאוד
 </h3>
 <h4>
     <br />
@@ -29,9 +31,7 @@
             <table class="table">
                 <tr>
                     <td style="font-size:larger"><b>רגש</b></td>
-                    <td>
-
-                    </td>
+                    <td></td>
                     @{
                         foreach (var item in Model.Options)
                         {
@@ -62,7 +62,7 @@
             </table>
             <div class="form-group">
                 <div class="col-md col-md-offset-12">
-                    <input style="font-size:large"type="submit" value="שלח" class="btn btn-default" />
+                    <input style="font-size:large" type="submit" value="שלח" class="btn btn-default" />
                 </div>
             </div>
         </div>
