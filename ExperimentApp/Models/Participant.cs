@@ -22,14 +22,11 @@ namespace ExperimentApp.Models
         [Display(Name = "Experiment Option")]
         public ExperimentOptionEnum ExpOption { get { return expOption; } set { expOption = value; emotionalContent = (EmotionalContentEnum)Convert.ToInt32(expOption); } }
 
-        //writing assignment timing
-        public float WritingAssignmentTime { get; set; }
-
         //emotions from baseline video
         public string VideoBaselinePath { get; set; }
         public string VideoBaselineWithLabelsPath { get; set; }
         public string VideoBaselineDataPath { get; set; }
-        public virtual List<VideoBaselineEmotion> VideoBaselineEmotions { get; set; } //change this to dif Model...?
+        public virtual List<VideoBaselineEmotion> VideoBaselineEmotions { get; set; }
 
         //emotions from video
         public string VideoPath { get; set; }
@@ -47,8 +44,12 @@ namespace ExperimentApp.Models
         public string AudioDataPath { get; set; }
         public virtual List<AudioEmotion> AudioEmotions { get; set; } = new List<AudioEmotion>();
 
+
         //emotions - self report
         public SelfReportQuestionnaire SelfReportQuestionnaire { get; set; }
+
+        //writing assignment timing
+        public float WritingAssignmentTime { get; set; }
 
         //Ultimatum Game
         public int UltimatumReceivedSum { get; } = 10;

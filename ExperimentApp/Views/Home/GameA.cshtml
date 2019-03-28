@@ -24,28 +24,28 @@
         <div id="myGif1" style="display:none"><img id="waitingGif1" height="200" ; src="~/Content/Gifs/waiting.gif"></div>
         <p id="msg1" style="display:none">מחכים לשחקן השני...</p>
     </div>
-        <div id="ultiInstructions" style="display:none">
-            <div dir="rtl" lang="he" style="font-size:x-large;">
-                <div dir="rtl" lang="he">
-                    <h1>משחק ראשון:</h1>
-                    <p>זהו משחק בין 2 משתתפים המתרחש בשלושה שלבים:</p>
-                    <img height="150" src="~/Content/images/ultimatum_pic.png" style="float:left" ;>
-                    <p><u>בשלב הראשון:</u> השחקן הראשון מקבל סכום כסף כלשהו.</p>
-                    <p>
-                        <u>בשלב השני:</u> השחקן הראשון מחליט כמה כסף מתוך סכום זה הוא רוצה להציע לשחקן השני, אם בכלל.
-                    </p>
-                    <p> <u>בשלב השלישי:</u> בפני השחקן השני עומדות שתי אפשרויות: הסכמה או סירוב.</p>
-                    <p>אם יסכים - הכסף יחולק לפי הצעת השחקן הראשון. <b>אם יסרב - שני השחקנים לא יקבלו דבר</b>.</p>
-                    <p>בהצלחה!</p>
-                </div>
-                <div id="waitBtn">
-                    <br />
-                    <input type="button" style="float: right" ; value="לתחילת המשחק" onclick="show()">
-                </div>
-                <div id="myGif" style="display:none"><img id="waitingGif" height="200" ; src="~/Content/Gifs/waiting.gif"></div>
-                <p id="msg" style="display:none">מחכים לשחקן השני...</p>
+    <div id="ultiInstructions" style="display:none">
+        <div dir="rtl" lang="he" style="font-size:x-large;">
+            <div dir="rtl" lang="he">
+                <h1>משחק ראשון:</h1>
+                <p>זהו משחק בין 2 משתתפים המתרחש בשלושה שלבים:</p>
+                <img height="150" src="~/Content/images/ultimatum_pic.png" style="float:left" ;>
+                <p><u>בשלב הראשון:</u> השחקן הראשון מקבל סכום כסף כלשהו.</p>
+                <p>
+                    <u>בשלב השני:</u> השחקן הראשון מחליט כמה כסף מתוך סכום זה הוא רוצה להציע לשחקן השני, אם בכלל.
+                </p>
+                <p> <u>בשלב השלישי:</u> בפני השחקן השני עומדות שתי אפשרויות: הסכמה או סירוב.</p>
+                <p>אם יסכים - הכסף יחולק לפי הצעת השחקן הראשון. <b>אם יסרב - שני השחקנים לא יקבלו דבר</b>.</p>
+                <p>בהצלחה!</p>
             </div>
+            <div id="waitBtn">
+                <br />
+                <input type="button" style="float: right" ; value="לתחילת המשחק" onclick="show()">
+            </div>
+            <div id="myGif" style="display:none"><img id="waitingGif" height="200" ; src="~/Content/Gifs/waiting.gif"></div>
+            <p id="msg" style="display:none">מחכים לשחקן השני...</p>
         </div>
+    </div>
 
     <div id="youStart" style="display:none" dir="rtl" lang="he">
         <h1 style="color:red;font-size:xx-large">נבחרת להיות השחקן הראשון!</h1>
@@ -58,8 +58,8 @@
     </center>
 
     @*<center>
-        <img id="picture" height="150" src="~/Content/images/ultimatum_pic.png" style="display:none;float:left"/>
-    </center>*@
+            <img id="picture" height="150" src="~/Content/images/ultimatum_pic.png" style="display:none;float:left"/>
+        </center>*@
 
     @using (Html.BeginForm())
     {
@@ -68,8 +68,15 @@
         @Html.HiddenFor(model => model.ID)
         @Html.HiddenFor(model => model.ExpOption)
         @Html.HiddenFor(model => model.EmotionalContent)
+        @Html.HiddenFor(model => model.VideoBaselinePath)
+        @Html.HiddenFor(model => model.VideoBaselineWithLabelsPath)
+        @Html.HiddenFor(model => model.VideoBaselineDataPath)
+        @Html.HiddenFor(model => model.AudioBaselinePath)
+        @Html.HiddenFor(model => model.AudioBaselineDataPath)
         @Html.HiddenFor(model => model.VideoPath)
+        @Html.HiddenFor(model => model.VideoWithLabelsPath)
         @Html.HiddenFor(model => model.VideoDataPath)
+        @Html.HiddenFor(model => model.WritingAssignmentTime)
         @Html.HiddenFor(model => model.AudioPath)
         @Html.HiddenFor(model => model.AudioDataPath)
         @Html.HiddenFor(model => model.UltimatumInstructionReadTime)

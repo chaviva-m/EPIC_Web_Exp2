@@ -15,31 +15,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body dir="rtl" lang="he" style="font-size:x-large">
-    <br /><br /><br />
-    <h1>ספר לנו על החוויה</h1>
-    <br />
-    <p>אנא שתף אותנו במשפט אחד או שניים בתחושותיך מהצפייה בסרטון או מהאירוע בו נזכרת. @*תוכל להיעזר במילים המופיעות מטה, כרצונך.*@ </p>
-    <p>כשאתה מוכן, לחץ על "הקלט" ולסיום "עצור".</p>
-    <p style="display:none">אנא השתדל לדבר בקול רם וברור @*ובסמוך למחשב*@.</p>
-    <br />
-    <div style="display:none">
-        <center>
-            <img width="1200" , src="~/Content/images/emotion_words.png">
-        </center>
+<body dir="rtl" lang="he">
+    <div style="font-size:x-large">
+        <br /><br /><br />
+        <h1>ספר לנו על החוויה</h1>
+        <br />
+        <p>אנא שתף אותנו במשפט אחד או שניים בתחושותיך מהצפייה בסרטון או מהאירוע בו נזכרת. @*תוכל להיעזר במילים המופיעות מטה, כרצונך.*@ </p>
+        <p>כשאתה מוכן, לחץ על "הקלט" ולסיום "עצור".</p>
+        <p style="display:none">אנא השתדל לדבר בקול רם וברור @*ובסמוך למחשב*@.</p>
+        <br />
+        <div style="display:none">
+            <center>
+                <img width="1200" , src="~/Content/images/emotion_words.png">
+            </center>
+        </div>
+        <br />
+        <p id="rec_msg" disabled style="display:none">מקליט...</p>
+        <div id="controls">
+            <button id="recordButton">הקלט</button>
+            <button id="pauseButton" disabled style="display:none">Pause</button>
+            <button id="stopButton" disabled>עצור</button>
+            <h1 id="fileName" style="display:none">@Model.AudioPath</h1>
+        </div>
+        <div id="formats" disabled style="display:none">Format: start recording to see sample rate</div>
+        <h3 style="display:none" id="recordings">הקלטות:</h3>
+        <ol id="recordingsList"></ol>
     </div>
-    <br />
-    <p id="rec_msg" disabled style="display:none">מקליט...</p>
-    <div id="controls">
-        <button id="recordButton">הקלט</button>
-        <button id="pauseButton" disabled style="display:none">Pause</button>
-        <button id="stopButton" disabled>עצור</button>
-        <h1 id="fileName" style="display:none">@Model.AudioPath</h1>
-    </div>
-    <div id="formats" disabled style="display:none">Format: start recording to see sample rate</div>
-    <h3 style="display:none" id="recordings">הקלטות:</h3>
-    <ol id="recordingsList"></ol>
-
 
     <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
     <script src="~/Scripts/Recorder.js"></script>

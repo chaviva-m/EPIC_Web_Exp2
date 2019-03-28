@@ -12,7 +12,13 @@
     @Html.HiddenFor(model => model.ID)
     @Html.HiddenFor(model => model.ExpOption)
     @Html.HiddenFor(model => model.EmotionalContent)
+    @Html.HiddenFor(model => model.VideoBaselinePath)
+    @Html.HiddenFor(model => model.VideoBaselineWithLabelsPath)
+    @Html.HiddenFor(model => model.VideoBaselineDataPath)
+    @Html.HiddenFor(model => model.AudioBaselinePath)
+    @Html.HiddenFor(model => model.AudioBaselineDataPath)
     @Html.HiddenFor(model => model.VideoPath)
+    @Html.HiddenFor(model => model.VideoWithLabelsPath)
     @Html.HiddenFor(model => model.VideoDataPath)
     @Html.HiddenFor(model => model.WritingAssignmentTime)
 
@@ -21,7 +27,6 @@
     <br /><br /><br /><br /><br /><br />
     <h2>נסו להזכר...</h2>
     <br />
-    <img id="neutral_picture" height="200" ; src="~/content/images/coffee.jpg" style="display:none;float:left" />
     <body dir="rtl" lang="he" onLoad="onStart();">
         <div style="font-size:x-large">
             <center>
@@ -29,8 +34,9 @@
                 <img id="happy_picture" height="150" ; src="~/content/images/happy.jpg" style="display:none;float:left" />
                 <img id="sad_picture" height="200" ; src="~/content/images/sad.jpg" style="display:none;float:left" />
 
-                <p id="paragraph"> </p>
+                <p id="paragraph"></p>
                 <br />
+                <img id="neutral_picture" height="180" ; src="~/content/images/coffee.jpg" style="display:none;float:left" />
                 <p>הדף הוא לשימושך בלבד, בסוף הניסוי אתה מוזמן לקחת אותו איתך.</p>
                 <br /><br />
                 <input style="font-size:x-large" @*;display:none"*@ id="submit" type="submit" value="סיימתי" class="submit" onclick="finished(); return true;" />
@@ -70,7 +76,6 @@
     function finished() {
         writingAssignmentEnd = Math.floor(Date.now() / 1000);    //participant finished writing assignment
         document.getElementById('WritingAssignmentTime').value = writingAssignmentEnd - writingAssignmentStart;
-        alert(document.getElementById('WritingAssignmentTime').value);
         //window.location.href = '@Url.Action("FinishedWritingAssignment", new { id = Model.ID })';
     }
 </script>

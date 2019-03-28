@@ -156,9 +156,10 @@ namespace ExperimentApp.Controllers
 
         public ActionResult GetVideo(EmotionalContentEnum em)
         {
-            string relativeVideoPath = EmotionInducingContent.VideoByContent[em];
-            var videoPath =
-               Request.MapPath(relativeVideoPath);
+            //string relativeVideoPath = EmotionInducingContent.VideoByContent[em];
+            //var videoPath =
+            //   Request.MapPath(relativeVideoPath);
+            var videoPath = EmotionInducingContent.VideoByContent[em];
             FileStream fs =
                new FileStream(videoPath, FileMode.Open);
             return new FileStreamResult(fs, "video/mp4");
