@@ -21,7 +21,10 @@ namespace ExperimentApp.Models
         private ExperimentOptionEnum expOption;
         [Display(Name = "Experiment Option")]
         public ExperimentOptionEnum ExpOption { get { return expOption; } set { expOption = value; emotionalContent = (EmotionalContentEnum)Convert.ToInt32(expOption); } }
-        
+
+        //writing assignment timing
+        public float WritingAssignmentTime { get; set; }
+
         //emotions from baseline video
         public string VideoBaselinePath { get; set; }
         public string VideoBaselineWithLabelsPath { get; set; }

@@ -1,0 +1,76 @@
+﻿@model ExperimentApp.Models.Participant
+@using ExperimentApp.Infrastructure
+
+@{
+    ViewBag.Title = "WritingAssignment";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.ExpOption)
+    @Html.HiddenFor(model => model.EmotionalContent)
+    @Html.HiddenFor(model => model.VideoPath)
+    @Html.HiddenFor(model => model.VideoDataPath)
+    @Html.HiddenFor(model => model.WritingAssignmentTime)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <br /><br /><br /><br /><br /><br />
+    <h2>נסו להזכר...</h2>
+    <br />
+    <img id="neutral_picture" height="200" ; src="~/content/images/coffee.jpg" style="display:none;float:left" />
+    <body dir="rtl" lang="he" onLoad="onStart();">
+        <div style="font-size:x-large">
+            <center>
+
+                <img id="happy_picture" height="150" ; src="~/content/images/happy.jpg" style="display:none;float:left" />
+                <img id="sad_picture" height="200" ; src="~/content/images/sad.jpg" style="display:none;float:left" />
+
+                <p id="paragraph"> </p>
+                <br />
+                <p>הדף הוא לשימושך בלבד, בסוף הניסוי אתה מוזמן לקחת אותו איתך.</p>
+                <br /><br />
+                <input style="font-size:x-large" @*;display:none"*@ id="submit" type="submit" value="סיימתי" class="submit" onclick="finished(); return true;" />
+
+            </center>
+        </div>
+    </body>
+    <p id="Happy" style="display:none">@EmotionalContentEnum.Happy</p>
+    <p id="Neutral" style="display:none">@EmotionalContentEnum.Neutral</p>
+    <p id="Sad" style="display:none">@EmotionalContentEnum.Sad</p>
+    <p id="emotion" style="display:none">@Model.EmotionalContent</p>
+
+}
+<script>
+    var writingAssignmentStart;
+    var writingAssignmentEnd;
+    function onStart() {
+        writingAssignmentStart = Math.floor(Date.now() / 1000);    //start taking time
+        //setTimeout("showButton()", 20000);  //can continue to next page only after at least 20 sec
+        var x = document.getElementById("emotion").innerHTML;
+        if (x == document.getElementById("Sad").innerHTML) {
+            document.getElementById("paragraph").innerHTML = "נסה להיזכר במאורע עצוב שקרה לך בעבר. אנא תאר בכתיבה על דף בכמה מילים את מה שחווית.";
+            document.getElementById("sad_picture").style.display = "block";
+        } else if (x == document.getElementById("Neutral").innerHTML) {
+            document.getElementById("paragraph").innerHTML = "חשוב על בוקר שגרתי במהלך השבוע. נסה לשחזר את פעולותיך וכתוב אותם בכמה מילים על הדף.";
+            document.getElementById("neutral_picture").style.display = "block";
+        } else {
+            document.getElementById("paragraph").innerHTML = "נסה להיזכר במאורע משמח שקרה לך בעבר. אנא תאר בכתיבה על דף בכמה מילים את החוויה שלך.";
+            document.getElementById("happy_picture").style.display = "block";
+        }
+    }
+
+    //function showButton() {
+    //    document.getElementById("submit").style.display = "block";
+    //}
+
+    function finished() {
+        writingAssignmentEnd = Math.floor(Date.now() / 1000);    //participant finished writing assignment
+        document.getElementById('WritingAssignmentTime').value = writingAssignmentEnd - writingAssignmentStart;
+        alert(document.getElementById('WritingAssignmentTime').value);
+        //window.location.href = '@Url.Action("FinishedWritingAssignment", new { id = Model.ID })';
+    }
+</script>

@@ -176,10 +176,14 @@
     <Content Include="Content\Gifs\startLoad.gif" />
     <Content Include="Content\Gifs\waiting.gif" />
     <Content Include="Content\images\20_shekel.jpg" />
+    <Content Include="Content\images\coffee.jpg" />
+    <Content Include="Content\images\coffeeAlarm.jpg" />
     <Content Include="Content\images\emotion_words.jpg" />
     <Content Include="Content\images\emotion_words.png" />
+    <Content Include="Content\images\happy.jpg" />
     <Content Include="Content\images\moneySmile.jpg" />
     <Content Include="Content\images\play1.jpg" />
+    <Content Include="Content\images\sad.jpg" />
     <Content Include="Content\images\trust_instructions.png" />
     <Content Include="Content\images\ulti3.png" />
     <Content Include="Content\images\ultimatum_instructions.png" />
@@ -247,6 +251,7 @@
     <Content Include="Views\Home\SelfReport.cshtml" />
     <Content Include="Views\Home\BaselineAudio.cshtml" />
     <Content Include="Views\Home\VideoBaseline.cshtml" />
+    <Content Include="Views\Home\WritingAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Audio\" />

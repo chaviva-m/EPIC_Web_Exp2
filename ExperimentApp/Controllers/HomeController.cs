@@ -182,7 +182,7 @@ namespace ExperimentApp.Controllers
                 return HttpNotFound();
             }
             EndVideoRecording(participant, videoModel);
-            return RedirectToAction("Audio", new { id = participant.ID });
+            return RedirectToAction("WritingAssignment", new { id = participant.ID }); //Audio
         }
 
         public void EndVideoRecording(Participant participant, Video video)
@@ -193,6 +193,35 @@ namespace ExperimentApp.Controllers
             db.Entry(participant).State = EntityState.Modified;
             db.SaveChanges();
         }
+
+        [HttpGet]
+        public ActionResult WritingAssignment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Participant participant = db.Participants.Find(id);
+            if (participant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(participant);
+        }
+
+        [HttpPost]
+        public ActionResult WritingAssignment(Participant participant)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(participant).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Audio", new { id = participant.ID });
+            }
+
+            return View(participant);
+        }
+    
 
         public ActionResult Audio(int? id)
         {
